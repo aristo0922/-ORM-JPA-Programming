@@ -1,6 +1,6 @@
 **/.DS_Store
 **/.idea
-src/main/resources/application.properties
+**/resources/application.properties
 
 HELP.md
 .gradle
