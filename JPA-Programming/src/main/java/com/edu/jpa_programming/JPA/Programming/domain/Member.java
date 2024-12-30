@@ -6,7 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name ="MEMBER")
+@Table(name = "MEMBER")
 public class Member {
 
   @Id
@@ -31,5 +31,13 @@ public class Member {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public int getAge() {
+    return this.age;
   }
 }
