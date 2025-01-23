@@ -27,6 +27,29 @@ public class JpaMain {
     emf.close();
   }
 
+  public void testClearContext(EntityManagerFactory emf){
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction transaction = em.getTransaction();
+
+    Member member = em.find(Member.class, "memberA");
+    em.clear();
+    member.setUsername("changedName");
+  }
+
+  public void testDetached(EntityManagerFactory emf){
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction transaction = em.getTransaction();
+
+    Member member = new Member();
+    member.setId("memberA");
+    member.setUsername("회원A");
+
+    em.persist(member);
+    em.detach(member);
+
+    transaction.commit();
+  }
+
   private static void persist(EntityManagerFactory emf){
     Member memberA = new Member();
     Member memberB = new Member();
