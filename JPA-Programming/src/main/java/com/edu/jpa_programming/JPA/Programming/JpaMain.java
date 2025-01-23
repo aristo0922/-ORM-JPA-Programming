@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.Query;
 import java.util.List;
 
 public class JpaMain {
@@ -29,12 +30,16 @@ public class JpaMain {
   private static void persist(EntityManagerFactory emf){
     Member memberA = new Member();
     Member memberB = new Member();
+    Member memberC = new Member();
     EntityManager em = emf.createEntityManager();
     EntityTransaction transaction = em.getTransaction();
     transaction.begin();
 
     em.persist(memberA);
     em.persist(memberB);
+    em.persist(memberC);
+    Query query = em.createQuery("select m from Member m", Member.class);
+    List<Member> members = query.getResultList();
 
     transaction.commit();
   }
