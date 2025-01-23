@@ -1,4 +1,4 @@
-package com.edu.jpa_programming.JPA.Programming;
+package com.edu.jpa_programming.JPA.Programming.start;
 
 import com.edu.jpa_programming.JPA.Programming.domain.Member;
 import jakarta.persistence.EntityManager;
@@ -25,6 +25,21 @@ public class JpaMain {
       em.close();
     }
     emf.close();
+  }
+
+
+  public void closeEntityManager(){
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("testdb");
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction transaction = em.getTransaction();
+
+    transaction.begin();
+
+    Member memberA = em.find(Member.class, "memberA");
+    Member memberB = em.find(Member.class, "memberB");
+
+    transaction.commit();
+    em.close();
   }
 
   public void testClearContext(EntityManagerFactory emf){
