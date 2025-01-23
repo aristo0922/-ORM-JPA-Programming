@@ -26,6 +26,19 @@ public class JpaMain {
     emf.close();
   }
 
+  private static void persist(EntityManagerFactory emf){
+    Member memberA = new Member();
+    Member memberB = new Member();
+    EntityManager em = emf.createEntityManager();
+    EntityTransaction transaction = em.getTransaction();
+    transaction.begin();
+
+    em.persist(memberA);
+    em.persist(memberB);
+
+    transaction.commit();
+  }
+
   private static void logic(EntityManager em) {
     String id = "id1";
     Member member = new Member();
