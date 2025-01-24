@@ -2,9 +2,17 @@ package com.edu.jpa_programming.JPA.Programming.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.util.Date;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "MEMBER")
 public class Member {
@@ -17,27 +25,15 @@ public class Member {
 
   private Integer age;
 
-  public String getId() {
-    return id;
-  }
+  @Enumerated(EnumType.STRING)
+  private RoleType roleType;
 
-  public String getUsername() {
-    return username;
-  }
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date createdDate;
 
-  public void setId(String id) {
-    this.id = id;
-  }
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date lastModifiedDate;
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public void setAge(int age) {
-    this.age = age;
-  }
-
-  public int getAge() {
-    return this.age;
-  }
+  @Lob
+  private String description;
 }
