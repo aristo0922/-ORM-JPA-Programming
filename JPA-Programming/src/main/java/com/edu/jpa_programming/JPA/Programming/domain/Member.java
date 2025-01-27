@@ -9,12 +9,16 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.UniqueConstraint;
 import java.util.Date;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "MEMBER", uniqueConstraints = {@UniqueConstraint(
+    name = "NAME_AGE_UNIQUE",
+    columnNames = {"NAME", "AGE"}
+)})
 public class Member {
 
   @Id
