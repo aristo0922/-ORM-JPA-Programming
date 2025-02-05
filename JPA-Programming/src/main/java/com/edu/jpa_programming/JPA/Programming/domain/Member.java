@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -22,10 +24,14 @@ import lombok.Data;
 public class Member {
 
   @Id
-  @Column(name = "ID")
+  @Column(name = "MEMBER_ID")
   private String id;
   @Column(name = "NAME", nullable = false, length = 10)
   private String username;
+
+  @ManyToOne
+  @JoinColumn(name="TEAM_ID")
+  private Team team;
 
   private Integer age;
 
@@ -40,4 +46,8 @@ public class Member {
 
   @Lob
   private String description;
+
+  public void setTeam(Team team) {
+    this.team = team;
+  }
 }
