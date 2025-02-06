@@ -11,7 +11,7 @@ import java.util.List;
 public class JpaMain {
 
   public static void main(String[] args) {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("testdb");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa_mysql");
     EntityManager em = emf.createEntityManager();
     EntityTransaction tx = em.getTransaction();
 
@@ -29,7 +29,7 @@ public class JpaMain {
 
 
   public void closeEntityManager(){
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("testdb");
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa_mysql");
     EntityManager em = emf.createEntityManager();
     EntityTransaction transaction = em.getTransaction();
 

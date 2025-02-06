@@ -7,7 +7,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 
 public class ExamMergeMain {
-  static EntityManagerFactory emf = Persistence.createEntityManagerFactory("testdb");
+  static EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa_mysql");
 
   public static void main(String args[]){
     Member member = createMember("memberA", "회원1");

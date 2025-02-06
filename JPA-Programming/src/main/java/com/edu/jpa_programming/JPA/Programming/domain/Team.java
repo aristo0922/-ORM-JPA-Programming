@@ -3,14 +3,20 @@ package com.edu.jpa_programming.JPA.Programming.domain;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Team {
   @Id
-  @Column(name = "TEAM_ID")
+  @Column
   private String id;
 
+  @Column
   private String name;
+//
+//  @OneToMany
+//  private List<Member> Members;
 
   public String getName() {
     return name;

@@ -17,33 +17,37 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "MEMBER", uniqueConstraints = {@UniqueConstraint(
-    name = "NAME_AGE_UNIQUE",
-    columnNames = {"NAME", "AGE"}
-)})
+//@Table(name = "MEMBER", uniqueConstraints = {@UniqueConstraint(
+//    name = "NAME_AGE_UNIQUE",
+//    columnNames = {"NAME", "AGE"}
+//)})
 public class Member {
 
   @Id
-  @Column(name = "MEMBER_ID")
+  @Column
   private String id;
-  @Column(name = "NAME", nullable = false, length = 10)
+//  @Column(name = "NAME", nullable = false, length = 10)
   private String username;
 
   @ManyToOne
-  @JoinColumn(name="TEAM_ID")
+  @JoinColumn(name = "team_id")
   private Team team;
 
   private Integer age;
 
+  @Column(name = "role_type")
   @Enumerated(EnumType.STRING)
   private RoleType roleType;
 
+  @Column(name = "created_date")
   @Temporal(TemporalType.TIMESTAMP)
   private Date createdDate;
 
+  @Column(name = "last_modified_date")
   @Temporal(TemporalType.TIMESTAMP)
   private Date lastModifiedDate;
 
+  @Column
   @Lob
   private String description;
 
