@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import java.util.List;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Entity
 public class Team {
   @Id
@@ -32,5 +34,10 @@ public class Team {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public Team(String id, String name) {
+    this.id = id;
+    this.name = name;
   }
 }

@@ -14,7 +14,9 @@ import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 import java.util.Date;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Entity
 //@Table(name = "MEMBER", uniqueConstraints = {@UniqueConstraint(
@@ -50,6 +52,11 @@ public class Member {
   @Column
   @Lob
   private String description;
+
+  public Member(String id, String username) {
+    this.id = id;
+    this.username = username;
+  }
 
   public void setTeam(Team team) {
     this.team = team;
