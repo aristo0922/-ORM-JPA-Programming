@@ -14,13 +14,16 @@ import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
 import java.util.Date;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Entity
-@Table(name = "MEMBER", uniqueConstraints = {@UniqueConstraint(
-    name = "NAME_AGE_UNIQUE",
-    columnNames = {"NAME", "AGE"}
-)})
+@Table
+//@Table(name = "MEMBER", uniqueConstraints = {@UniqueConstraint(
+//    name = "NAME_AGE_UNIQUE",
+//    columnNames = {"NAME", "AGE"}
+//)})
 public class Member {
 
   @Id
@@ -29,7 +32,7 @@ public class Member {
   @Column(name = "NAME", nullable = false, length = 10)
   private String username;
 
-  @ManyToOne
+  @ManyToOne(targetEntity = Team.class)
   @JoinColumn(name="TEAM_ID")
   private Team team;
 
@@ -49,5 +52,10 @@ public class Member {
 
   public void setTeam(Team team) {
     this.team = team;
+  }
+
+  public Member(String id, String username) {
+    this.id = id;
+    this.username = username;
   }
 }

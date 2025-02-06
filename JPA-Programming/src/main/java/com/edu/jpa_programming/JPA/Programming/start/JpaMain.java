@@ -1,6 +1,7 @@
 package com.edu.jpa_programming.JPA.Programming.start;
 
 import com.edu.jpa_programming.JPA.Programming.domain.Member;
+import com.edu.jpa_programming.JPA.Programming.domain.Team;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;

@@ -1,6 +1,7 @@
 package com.edu.jpa_programming.JPA.Programming.persistence;
 
 import com.edu.jpa_programming.JPA.Programming.domain.Member;
+import com.edu.jpa_programming.JPA.Programming.domain.Team;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -13,6 +14,19 @@ public class ExamMergeMain {
     Member member = createMember("memberA", "회원1");
     member.setUsername("changedName");
     mergeMember(member);
+  }
+  static void testSave(EntityManagerFactory emf){
+    EntityManager em = emf.createEntityManager();
+    Team team1 = new Team("team1", "팀1");
+    em.persist(team1);
+
+    Member member1 = new Member("member1", "회원1");
+    member1.setTeam(team1);
+    em.persist(member1);
+
+    Member member2 = new Member("member2", "회원2");
+    member2.setTeam(team1);
+    em.persist(member2);
   }
 
   static Member createMember(String id, String username){
