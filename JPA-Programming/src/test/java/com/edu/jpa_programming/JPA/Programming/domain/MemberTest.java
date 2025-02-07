@@ -120,4 +120,17 @@ class MemberTest {
     List<Member> members = team1.getMembers();
     Assertions.assertEquals(0, members.size());
   }
+
+  @Test
+  public void test순수한객체_양방향2(){
+    Team team1 = new Team("team1", "팀1");
+    Member member1 = new Member("member1", "회원1");
+    Member member2 = new Member("member2", "회원2");
+
+    member1.setTeam(team1);
+    member2.setTeam(team1);
+
+    List<Member> members = team1.getMembers();
+    Assertions.assertEquals(2, members.size());
+  }
 }
