@@ -38,6 +38,7 @@ class MemberTest {
   @Test
   void testJoin(){
     queryLogicJoin(em);
+    updateRelation(em);
   }
   private static void queryLogicJoin(EntityManager em){
     String jpql = "select m from Member m join m.team t where "+"t.name =:teamName";
@@ -48,5 +49,14 @@ class MemberTest {
     for (Member member:resultList){
       System.out.println("[query] member.username = "+ member.getUsername());
     }
+  }
+
+  private static void updateRelation(EntityManager em){
+    Team team2 = new Team("team2", "팀2");
+    em.persist(team2);
+
+    Member member = em.find(Member.class, "member1");
+    System.out.println(member);
+    member.setTeam(team2);
   }
 }
