@@ -1,6 +1,7 @@
 package com.edu.jpa_programming.JPA.Programming.start;
 
 import com.edu.jpa_programming.JPA.Programming.domain.Member;
+import com.edu.jpa_programming.JPA.Programming.domain.Team;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -18,6 +19,7 @@ public class JpaMain {
     try {
       tx.begin();
       logic(em);
+      testSave(em);
       tx.commit();
     } catch (Exception e) {
       tx.rollback();
@@ -27,6 +29,18 @@ public class JpaMain {
     emf.close();
   }
 
+  static void testSave(EntityManager em){
+    Team team1 = new Team("team1", "팀1");
+    em.persist(team1);
+
+    Member member1 = new Member("member1", "회원1");
+    member1.setTeam(team1);
+    em.persist(member1);
+
+    Member member2 = new Member("member2", "회원2");
+    member2.setTeam(team1);
+    em.persist(member2);
+  }
 
   public void closeEntityManager(){
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa_mysql");
