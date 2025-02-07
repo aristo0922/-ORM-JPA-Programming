@@ -2,6 +2,7 @@ package com.edu.jpa_programming.JPA.Programming.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
@@ -39,7 +40,9 @@ class MemberTest {
   void testJoin(){
     queryLogicJoin(em);
     updateRelation(em);
+    deleteRelation(em);
   }
+
   private static void queryLogicJoin(EntityManager em){
     String jpql = "select m from Member m join m.team t where "+"t.name =:teamName";
     List<Member> resultList = em.createQuery(jpql, Member.class)
@@ -58,5 +61,34 @@ class MemberTest {
     Member member = em.find(Member.class, "member1");
     System.out.println(member);
     member.setTeam(team2);
+  }
+
+  private static void deleteRelation(EntityManager em){
+    Member member1 = em.find(Member.class, "member1");
+    member1.setTeam(null);
+  }
+
+  @Test
+  void biDirection() {
+    Team team = em.find(Team.class, "team1");
+    List<Member> members = team.getMembers();
+
+    for(Member member: members){
+      System.out.println("member.username = "+member.getUsername());
+    }
+  }
+
+  @Test
+  void testSave2(){
+    Team team2 = new Team("team2", "팀2");
+    em.persist(team2);
+
+    Member member3 = new Member("member3", "회원3");
+    member3.setTeam(team2);
+    em.persist(member3);
+
+    Member member4 = new Member("member4", "회원4");
+    member4.setTeam(team2);
+    em.persist(member4);
   }
 }
