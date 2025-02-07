@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ class MemberTest {
   }
 
   @Test
-  public void testSave(){
+  void testSave(){
     Team team1 = new Team("team1", "팀1");
     em.persist(team1);
 
@@ -32,5 +33,20 @@ class MemberTest {
     Member member2 = new Member("member2", "회원2");
     member2.setTeam(team1);
     em.persist(member2);
+  }
+
+  @Test
+  void testJoin(){
+    queryLogicJoin(em);
+  }
+  private static void queryLogicJoin(EntityManager em){
+    String jpql = "select m from Member m join m.team t where "+"t.name =:teamName";
+    List<Member> resultList = em.createQuery(jpql, Member.class)
+        .setParameter("teamName", "팀1")
+        .getResultList();
+
+    for (Member member:resultList){
+      System.out.println("[query] member.username = "+ member.getUsername());
+    }
   }
 }
